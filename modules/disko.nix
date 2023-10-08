@@ -9,7 +9,6 @@
           format = "gpt";
           partitions = [
             {
-              type = "partition";
               name = "ESP";
               start = "1MiB";
               end = "2g";
@@ -35,7 +34,6 @@
               };
             }
             {
-              type = "partition";
               name = "luks";
               start = "40G";
               end = "100%";
