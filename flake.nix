@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
     disko = {
-      url = "github:nix-community/disko";
+      url = "github:nix-community/disko/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-generators = {
@@ -13,6 +13,7 @@
   };
 
   outputs = { self, nixpkgs, nixos-generators, disko, ... }: {
+    apps.x86_64-linux.disko = inputs.disko.packages.x86_64-linux.disko;
     nixosConfigurations = {
       vm = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
