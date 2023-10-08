@@ -1,19 +1,15 @@
-{ disks ? [ "/dev/sda" ], ... }: {
+{
   disko.devices = {
     disk = {
-      disk-0 = {
+      sda = {
         type = "disk";
-        device = builtins.elemAt disks 0;
+        device = "/dev/sda";
         content = {
-          type = "table";
-          format = "gpt";
-          partitions = [
-            {
-              type = "filesystem";
-              name = "ESP";
-              start = "1MiB";
-              end = "2g";
-              bootable = true;
+          type = "gpt";
+          partitions = {
+            ESP = {
+              size = "2G";
+              type = "EF00";
               content = {
                 type = "filesystem";
                 format = "vfat";
@@ -22,23 +18,9 @@
                   "defaults"
                 ];
               };
-            }
-            {
-              name = "swap";
-              type = "partition";
-              start = "2G";
-              end = "26G";
-              part-type = "primary";
-              content = {
-                type = "swap";
-                randomEncryption = true;
-              };
-            }
-            {
-              type = "partition";
-              name = "luks";
-              start = "40G";
-              end = "100%";
+            };
+            luks = {
+              size = "100%";
               content = {
                 type = "luks";
                 name = "crypted";
@@ -48,8 +30,8 @@
                   vg = "pool";
                 };
               };
-            }
-          ];
+            };
+          };
         };
       };
     };
@@ -58,8 +40,7 @@
         type = "lvm_vg";
         lvs = {
           root = {
-            type = "lvm_lv";
-            size = "256G";
+            size = "5G";
             content = {
               type = "filesystem";
               format = "ext4";
@@ -69,9 +50,57 @@
               ];
             };
           };
+          var = {
+            size = "5G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/var";
+              mountOptions = [
+                "defaults"
+              ];
+            };
+          };
+          tmp = {
+            size = "20G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/tmp";
+              mountOptions = [
+                "defaults"
+              ];
+            };
+          };
+          var-lib = {
+            size = "10G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/var/lib";
+              mountOptions = [
+                "defaults"
+              ];
+            };
+          };
+          nix = {
+            size = "30G";
+            content = {
+              type = "btrfs";
+              extraArgs = [ "-f" ];
+              subvolumes = {
+                "/nix" = {
+                  mountpoint = "/nix";
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
+                };
+              };
+            };
+          };
           home = {
-            type = "lvm_lv";
-            size = "40G";
+            size = "5G";
             content = {
               type = "filesystem";
               format = "ext4";
@@ -79,13 +108,18 @@
             };
           };
           media = {
-            type = "lvm_lv";
             size = "200G";
             content = {
               type = "filesystem";
               format = "ext4";
-              mountpoint = "/mnt/shares/media";
+              mountpoint = "/srv/shares/media";
+              mountOptions = [
+                "defaults"
+              ];
             };
+          };
+          raw = {
+            size = "1G";
           };
         };
       };

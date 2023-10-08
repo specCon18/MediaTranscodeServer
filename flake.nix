@@ -6,13 +6,9 @@
       url = "github:nix-community/disko/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-generators = {
-      url = github:nix-community/nixos-generators;
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, nixos-generators, disko, ... }: {
+  outputs = { self, nixpkgs, disko, ... }: {
     apps.x86_64-linux.disko = {
       type = "app";
       program = "${disko.packages.x86_64-linux.disko}/bin/disko";
@@ -21,37 +17,15 @@
       vm = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./modules/docker.nix
           ./modules/tailscale.nix
           ./modules/openssh.nix
           ./modules/qemu-guest-agent.nix
           ./modules/ffmpeg.nix
-          ./modules/disko.nix
-          {
-            _module.args.disks = [ "/dev/sda" ];
-          }
-          disko.nixosModules.disko
-        ];
-      };
-      sync = nixos-generators.nixosGenerate {
-        system = "x86_64-linux";
-        format = "docker";
-        modules = [
           ./modules/syncthing.nix
-        ];
-      };
-      samba = nixos-generators.nixosGenerate {
-        system = "x86_64-linux";
-        format = "docker";
-        modules = [
-          ./modules/samba.nix  
-        ];
-      };
-      db = nixos-generators.nixosGenerate {
-        system = "x86_64-linux";
-        format = "docker";
-        modules = [
-          ./modules/surrealdb.nix  
+          ./modules/samba.nix
+          ./modules/surrealdb.nix
+          ./modules/disko.nix
+          disko.nixosModules.disko
         ];
       };
     };

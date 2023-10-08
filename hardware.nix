@@ -5,7 +5,7 @@
   boot = {
     initrd = {
       availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "sr_mod" "sd_mod" ]; 
-      kernelModules = [ "amdgpu" ];
+      kernelModules = [ "amdgpu" "dm-snapshot" "dm-cache-default" ];
     };
     kernelModules = [ "kvm-amd" ];
   };
