@@ -1,4 +1,4 @@
-{ disks ? [ "/dev/vda" ], ... }: {
+{ disks ? [ "/dev/sda" ], ... }: {
   disk = {
     disk-0 = {
       type = "disk";
