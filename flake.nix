@@ -15,7 +15,7 @@
   outputs = { self, nixpkgs, nixos-generators, disko, ... }: {
     apps.x86_64-linux.disko = {
       type = "app";
-      program = disko.packages.x86_64-linux.disko;
+      program = disko.packages.x86_64-linux.disko.path;
     };
     nixosConfigurations = {
       vm = nixpkgs.lib.nixosSystem {
