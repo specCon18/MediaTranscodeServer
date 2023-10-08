@@ -28,8 +28,7 @@
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-    # prevent tampering
-    readOnlyStore = true;
+
   };
   networking = {
     firewall.checkReversePath = "loose";

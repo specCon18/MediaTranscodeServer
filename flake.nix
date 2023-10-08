@@ -21,7 +21,7 @@
           ./modules/openssh.nix
           ./modules/qemu-guest-agent.nix
           ./modules/ffmpeg.nix
-          ./modules/syncthing.nix
+          #./modules/syncthing.nix
           ./modules/samba.nix
           ./modules/surrealdb.nix
           ./modules/disko.nix
