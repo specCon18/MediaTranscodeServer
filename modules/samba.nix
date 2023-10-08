@@ -23,7 +23,6 @@
         path = "/mnt/shares/media";
         browseable = "yes";
         comment = "Media Share";
-        browseable = "yes";
         "read only" = "no";
         "guest ok" = "no";
         "create mask" = "0644";
