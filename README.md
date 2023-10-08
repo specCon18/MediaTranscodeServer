@@ -3,4 +3,4 @@
 - then places it in a samba share to be accessed by editing software on a windows device on network.
 
 ### Credits:
-- [Arouzing](https://github.com/JeremiahSecrist/)
+- [Arouzing](https://github.com/JeremiahSecrist/) for the help getting the build squared
