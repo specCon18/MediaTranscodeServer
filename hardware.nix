@@ -7,11 +7,12 @@
       availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "sr_mod" "sd_mod" ]; 
       kernelModules = [ "amdgpu" "dm-snapshot" "dm-cache-default" ];
     };
+    loader.grub.devices = [ "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1" ];
     kernelModules = [ "kvm-amd" ];
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
   time.timeZone = "America/Detroit";
   nix = {
     # nix flakes

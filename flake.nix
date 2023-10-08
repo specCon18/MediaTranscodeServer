@@ -25,6 +25,7 @@
           ./modules/samba.nix
           ./modules/surrealdb.nix
           ./modules/disko.nix
+          ./hardware.nix
           disko.nixosModules.disko
         ];
       };
