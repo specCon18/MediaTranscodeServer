@@ -25,7 +25,7 @@
     };
     nixosConfigurations = {
       vm = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit nixpkgs-unfree };
+        specialArgs = { inherit nixpkgs-unfree; };
         system = "x86_64-linux";
         modules = [
           ./modules/tailscale.nix
