@@ -1,4 +1,4 @@
-{config, lib, nixpkgs-unfree, modulesPath, ... }:
+{config, lib, pkgs, nixpkgs-unfree, ... }:
 {
   environment.systemPackages = [
     nixpkgs-unfree.packages.x86_64-linux.surrealdb

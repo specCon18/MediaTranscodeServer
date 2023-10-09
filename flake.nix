@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
     # The unfree instance
-    inputs.nixpkgs-unfree = {
+    nixpkgs-unfree = {
       url = "github:numtide/nixpkgs-unfree";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -18,7 +18,7 @@
     extra-trusted-public-keys = [ "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE=" ];
   };
 
-  outputs = { self, nixpkgs, disko, nixpkgs-unfree ... }: {
+  outputs = { self, nixpkgs, disko, nixpkgs-unfree, ... }: {
     apps.x86_64-linux.disko = {
       type = "app";
       program = "${disko.packages.x86_64-linux.disko}/bin/disko";
